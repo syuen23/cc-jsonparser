@@ -20,3 +20,16 @@ class TestJSONParser:
         """
         result = self.runner.invoke(compile_json_file, [filename])
         return result
+
+    def truthy(self, value):
+        return bool(value)
+
+    def falsy(self, value):
+        return not bool(value)
+
+    def test_step_one(self):
+        invalid = self.run_single_file("./tests/step1/invalid.json")
+        valid = self.run_single_file("./tests/step1/valid.json")
+
+        assert self.falsy(invalid) == False
+        assert self.truthy(valid) == True
